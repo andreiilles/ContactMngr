@@ -1,6 +1,3 @@
-#ifndef NODE_H
-#define NODE_H
-
 #include <string>
 
 using namespace std;
@@ -19,4 +16,4 @@ public:
         : name(name), phone(phone), color(RED), left(nullptr), right(nullptr), parent(nullptr) {}
 };
 
-#endif // NODE_H
+

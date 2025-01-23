@@ -1,6 +1,3 @@
-#ifndef REDBLACKTREE_H
-#define REDBLACKTREE_H
-
 #include "Node.h"
 #include <string>
 
@@ -15,10 +12,9 @@ private:
     void fixInsert(Node*& node);
     void fixDelete(Node*& node);
     Node* search(Node* node, const string& name) const;
-    void inorderTraversal(Node* node) const;
-    Node* minimum(Node* node);
     void listContacts(Node* node);
-    void printTree(Node* node, int indent) const;
+
+    void visualizeTree(Node* node, int indent) const;
 public:
     RedBlackTree();
 
@@ -29,5 +25,3 @@ public:
     void visualizeTree() const;
     void insertRomanianContacts();
 };
-
-#endif // REDBLACKTREE_H

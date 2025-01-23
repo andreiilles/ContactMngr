@@ -56,7 +56,6 @@ void RedBlackTree::fixInsert(Node*& node) {
         if (parent == grandparent->left) {
             Node* uncle = grandparent->right;
 
-            // Case 1: Uncle is red
             if (uncle != nullptr && uncle->color == RED) {
                 grandparent->color = RED;
                 parent->color = BLACK;
@@ -64,14 +63,12 @@ void RedBlackTree::fixInsert(Node*& node) {
                 node = grandparent;
             }
             else {
-                // Case 2: Node is right child
                 if (node == parent->right) {
                     rotateLeft(parent);
                     node = parent;
                     parent = node->parent;
                 }
 
-                // Case 3: Node is left child
                 rotateRight(grandparent);
                 swap(parent->color, grandparent->color);
                 node = parent;
@@ -80,7 +77,6 @@ void RedBlackTree::fixInsert(Node*& node) {
         else {
             Node* uncle = grandparent->left;
 
-            // Case 1: Uncle is red
             if (uncle != nullptr && uncle->color == RED) {
                 grandparent->color = RED;
                 parent->color = BLACK;
@@ -88,14 +84,11 @@ void RedBlackTree::fixInsert(Node*& node) {
                 node = grandparent;
             }
             else {
-                // Case 2: Node is left child
                 if (node == parent->left) {
                     rotateRight(parent);
                     node = parent;
                     parent = node->parent;
                 }
-
-                // Case 3: Node is right child
                 rotateLeft(grandparent);
                 swap(parent->color, grandparent->color);
                 node = parent;
@@ -210,8 +203,7 @@ void RedBlackTree::insert(const string& name, const string& phone) {
 }
 
 void RedBlackTree::remove(const string& name) {
-    // Implementation of deletion logic (based on standard RBT deletion rules)
-    // Omitted for brevity; let me know if you need it fully implemented.
+    //de implementat
 }
 
 void RedBlackTree::listContacts() {
@@ -226,26 +218,20 @@ void RedBlackTree::listContacts() {
 
 void RedBlackTree::listContacts(Node* node) {
     if (node == nullptr) {
-        return; // Base case: stop at null nodes
+        return; 
     }
 
-    // Recursively traverse the left subtree
     listContacts(node->left);
-
-    // Visit the current node (display contact)
     cout << "Name: " << node->name << ", Phone: " << node->phone << "\n";
 
-    // Recursively traverse the right subtree
     listContacts(node->right);
 }
 
 Node* RedBlackTree::search(Node* node, const std::string& name) const {
     if (node == nullptr || node->name == name) {
-        // Return the node if found, or nullptr if not found
         return node;
     }
 
-    // Recurse into the left or right subtree based on the comparison
     if (name < node->name) {
         return search(node->left, name);
     }
@@ -255,8 +241,8 @@ Node* RedBlackTree::search(Node* node, const std::string& name) const {
 }
 
 string RedBlackTree::search(const string& name) const {
-    Node* result = search(root, name); // Call the private helper
-    return (result != nullptr) ? result->phone : ""; // Return phone if found, else empty string
+    Node* result = search(root, name);
+    return (result != nullptr) ? result->phone : ""; 
 }
 
 void RedBlackTree::visualizeTree() const {
@@ -264,36 +250,39 @@ void RedBlackTree::visualizeTree() const {
         cout << "The tree is empty.\n";
         return;
     }
-    printTree(root, 0);
+    visualizeTree(root, 0);
 }
-void RedBlackTree::printTree(Node* node, int indent) const {
+void RedBlackTree::visualizeTree(Node* node, int indent) const {
     if (node == nullptr) {
         return;
     }
 
-    // Print right subtree first for better visualization
-    printTree(node->right, indent + 4);
-
-    // Print the current node with indentation
-    if (node->color) {
-        cout << setw(indent) << "" << "RED: " << node->name << " (" << node->phone << ")\n";
+    for (int i = 0; i < indent; i++) {
+        cout << "  ";
+    }
+    cout << node->name << " (" << node->phone << ") ";
+    if (node->color == RED) {
+        cout << "[RED]";
     }
     else {
-        cout << setw(indent) << "" << "BLACK: " << node->name << " (" << node->phone << ")\n";
+        cout << "[BLACK]";
     }
+    cout << "\n";
 
-    // Print left subtree
-    printTree(node->left, indent + 4);
+    if (node->left != nullptr || node->right != nullptr) {
+        visualizeTree(node->left, indent + 1);
+        visualizeTree(node->right, indent + 1);
+    }
 }
 void RedBlackTree::insertRomanianContacts() {
-    insert("Andrei", "0741-234-567");
-    insert("Bianca", "0752-345-678");
-    insert("Cristian", "0763-456-789");
-    insert("Daciana", "0774-567-890");
-    insert("Elena", "0785-678-901");
-    insert("Florin", "0796-789-012");
-    insert("Gheorghe", "0701-890-123");
-    insert("Irina", "0712-901-234");
-    insert("Jorge", "0723-012-345");
-    insert("Katalin", "0734-123-456");
+    insert("Andrei", "0741234567");
+    insert("Bianca", "0752345678");
+    insert("Cristian", "0763456789");
+    insert("Daciana", "0774567890");
+    insert("Elena", "0785678901");
+    insert("Florin", "0796789012");
+    insert("Gheorghe", "0701890123");
+    insert("Irina", "0712901234");
+    insert("Jorge", "0723012345");
+    insert("Katalin", "0734123456");
 }
